@@ -59,7 +59,7 @@ export const aboutContent: Record<Lang, AboutContent> = {
       heading: 'Une équipe de direction expérimentée',
       intro: 'Des expertises complémentaires au service de votre transformation.',
       members: [
-        { name: 'Miriame Ariane Fernandez', role: 'Directrice Générale', focus: 'Direction stratégique, pilotage opérationnel et coordination des équipes.', photo: '/team/miriame-ariane-fernandez.jpeg' },
+        { name: 'Miriame Ariane Fernandez', role: 'Directrice Générale', focus: 'Dirigeante expérimentée, Miriame Ariane Fernandez pilote la stratégie et les opérations de FinTech Consulting SA. Sa vision : structurer, développer et faire grandir le cabinet en combinant innovation, qualité de service et excellence opérationnelle. Elle supervise la direction stratégique, la coordination des équipes, la gestion des opérations, la qualité des prestations et les relations partenaires.', photo: '/team/miriame-ariane-fernandez.jpeg' },
         { name: 'Adonis Dinga', role: 'Directeur Commercial & Marketing', focus: 'Stratégie marketing, acquisition clients et développement des partenariats.' },
         { name: 'Samba Sidibe', role: 'Directeur Informatique', focus: 'Architecture technique, déploiement des infrastructures et cybersécurité.' },
         { name: 'Anne Nguessan', role: 'Directrice Juridique', focus: 'Conformité réglementaire, protection des données et gestion des contrats.' },
@@ -111,7 +111,7 @@ export const aboutContent: Record<Lang, AboutContent> = {
       heading: 'An experienced leadership team',
       intro: 'Complementary expertise serving your transformation.',
       members: [
-        { name: 'Miriame Ariane Fernandez', role: 'General Manager', focus: 'Strategic direction, operational oversight and team coordination.', photo: '/team/miriame-ariane-fernandez.jpeg' },
+        { name: 'Miriame Ariane Fernandez', role: 'General Manager', focus: 'An experienced leader, Miriame Ariane Fernandez drives the strategy and operations of FinTech Consulting SA. Her vision: to structure, grow and scale the firm by combining innovation, service quality and operational excellence. She oversees strategic direction, team coordination, operations management, service quality and partner relations.', photo: '/team/miriame-ariane-fernandez.jpeg' },
         { name: 'Adonis Dinga', role: 'Commercial & Marketing Director', focus: 'Marketing strategy, client acquisition and partnership development.' },
         { name: 'Samba Sidibe', role: 'IT Director', focus: 'Technical architecture, infrastructure deployment and cybersecurity.' },
         { name: 'Anne Nguessan', role: 'Legal Director', focus: 'Regulatory compliance, data protection and contract management.' },

@@ -10,6 +10,9 @@ interface Props {
 const { content: c, lang } = Astro.props;
 const t = useTranslations(lang);
 const contactHref = `${localizePath('/', lang)}#contact`;
+const dgMember = c.team.members[0];
+const otherMembers = c.team.members.slice(1);
+const initials = (name: string) => name.split(' ').map((w) => w[0]).slice(0, 2).join('');
 ---
 
 <!-- Hero -->
@@ -69,31 +72,36 @@ const contactHref = `${localizePath('/', lang)}#contact`;
   <div class="mx-auto max-w-5xl px-5 lg:px-8">
     <h2 class="text-3xl font-bold text-ink-950">{c.team.heading}</h2>
     <p class="mt-3 text-lg text-ink-500">{c.team.intro}</p>
-    <div class="mt-8 grid gap-5 sm:grid-cols-2">
+
+    <!-- Directrice Générale en vedette -->
+    <article class="reveal mt-8 grid overflow-hidden rounded-3xl border border-ink-100 bg-white sm:grid-cols-[16rem_1fr]">
       {
-        c.team.members.map((m) => (
+        dgMember.photo ? (
+          <img src={dgMember.photo} alt={dgMember.name} loading="lazy" class="h-72 w-full object-cover object-top sm:h-full" />
+        ) : (
+          <div class="flex h-72 items-center justify-center bg-brand-600 text-5xl font-bold text-white sm:h-full">
+            {initials(dgMember.name)}
+          </div>
+        )
+      }
+      <div class="p-7 sm:p-9">
+        <span class="inline-block rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-brand-700">{dgMember.role}</span>
+        <h3 class="mt-4 text-2xl font-bold text-ink-950">{dgMember.name}</h3>
+        <p class="mt-4 leading-relaxed text-ink-600">{dgMember.focus}</p>
+      </div>
+    </article>
+
+    <!-- Les autres membres -->
+    <div class="mt-6 grid gap-5 sm:grid-cols-3">
+      {
+        otherMembers.map((m) => (
           <article class="reveal rounded-2xl border border-ink-100 bg-white p-6 transition hover:-translate-y-1 hover:shadow-lg hover:shadow-ink-900/5">
-            <div class="flex items-center gap-4">
-              {m.photo ? (
-                <img
-                  src={m.photo}
-                  alt={m.name}
-                  width="56"
-                  height="56"
-                  loading="lazy"
-                  class="h-14 w-14 shrink-0 rounded-full object-cover"
-                />
-              ) : (
-                <span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-600 text-base font-bold text-white">
-                  {m.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}
-                </span>
-              )}
-              <div>
-                <h3 class="font-semibold text-ink-900">{m.name}</h3>
-                <p class="text-sm font-medium text-brand-600">{m.role}</p>
-              </div>
-            </div>
-            <p class="mt-4 text-sm leading-relaxed text-ink-500">{m.focus}</p>
+            <span class="flex h-14 w-14 items-center justify-center rounded-full bg-brand-600 text-base font-bold text-white">
+              {initials(m.name)}
+            </span>
+            <h3 class="mt-4 font-semibold text-ink-900">{m.name}</h3>
+            <p class="text-sm font-medium text-brand-600">{m.role}</p>
+            <p class="mt-3 text-sm leading-relaxed text-ink-500">{m.focus}</p>
           </article>
         ))
       }
