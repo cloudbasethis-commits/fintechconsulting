@@ -1,0 +1,114 @@
+---
+import type { Post } from '../utils/blog';
+import { postSlug, readingTime, formatDate } from '../utils/blog';
+import { useTranslations, localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  posts: Post[];
+  heading: string;
+  intro: string;
+  currentPage?: number;
+  totalPages?: number;
+}
+const { lang, posts, heading, intro, currentPage = 1, totalPages = 1 } = Astro.props;
+const t = useTranslations(lang);
+
+const pageHref = (p: number) =>
+  p <= 1 ? localizePath('/blog', lang) : localizePath(`/blog/page/${p}`, lang);
+const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+const labels =
+  lang === 'fr'
+    ? { prev: 'Précédent', next: 'Suivant', page: 'Page' }
+    : { prev: 'Previous', next: 'Next', page: 'Page' };
+---
+
+<section class="bg-white py-16 lg:py-24">
+  <div class="mx-auto max-w-5xl px-5 lg:px-8">
+    <header class="max-w-2xl">
+      <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{t('nav.blog')}</p>
+      <h1 class="mt-3 text-4xl font-bold text-ink-950 sm:text-5xl">{heading}</h1>
+      <p class="mt-4 text-lg text-ink-500">{intro}</p>
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <p class="mt-12 text-ink-500">{lang === 'fr' ? 'Articles à venir très bientôt.' : 'Articles coming very soon.'}</p>
+      ) : (
+        <div class="mt-12 grid gap-8 sm:grid-cols-2">
+          {posts.map((post) => (
+            <article class="group flex flex-col overflow-hidden rounded-2xl border border-ink-100 bg-white transition hover:border-brand-200 hover:shadow-xl hover:shadow-ink-900/5">
+              {post.data.cover && (
+                <a href={localizePath(`/blog/${postSlug(post.id)}`, lang)} class="block overflow-hidden">
+                  <img
+                    src={typeof post.data.cover === 'string' ? post.data.cover : post.data.cover.src}
+                    alt={post.data.title}
+                    loading="lazy"
+                    class="aspect-[16/9] w-full object-cover transition duration-300 group-hover:scale-105"
+                  />
+                </a>
+              )}
+              <div class="flex flex-1 flex-col p-6">
+                <div class="flex flex-wrap gap-2">
+                  {post.data.tags.slice(0, 2).map((tag) => (
+                    <span class="rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-medium text-brand-700">{tag}</span>
+                  ))}
+                </div>
+                <h2 class="mt-3 text-xl font-semibold text-ink-900 group-hover:text-brand-600">
+                  <a href={localizePath(`/blog/${postSlug(post.id)}`, lang)}>{post.data.title}</a>
+                </h2>
+                <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{post.data.description}</p>
+                <p class="mt-4 text-xs text-ink-500">
+                  {formatDate(post.data.pubDate, lang)} · {readingTime(post.body)} {t('common.minRead')}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      totalPages > 1 && (
+        <nav class="mt-14 flex items-center justify-center gap-2" aria-label="Pagination">
+          {currentPage > 1 && (
+            <a
+              href={pageHref(currentPage - 1)}
+              rel="prev"
+              class="rounded-lg border border-ink-200 px-3.5 py-2 text-sm font-medium text-ink-700 transition hover:border-brand-400 hover:text-brand-600"
+            >
+              ← {labels.prev}
+            </a>
+          )}
+          {pageNumbers.map((p) =>
+            p === currentPage ? (
+              <span
+                aria-current="page"
+                class="rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white"
+              >
+                {p}
+              </span>
+            ) : (
+              <a
+                href={pageHref(p)}
+                class="rounded-lg border border-ink-200 px-4 py-2 text-sm font-medium text-ink-700 transition hover:border-brand-400 hover:text-brand-600"
+              >
+                {p}
+              </a>
+            )
+          )}
+          {currentPage < totalPages && (
+            <a
+              href={pageHref(currentPage + 1)}
+              rel="next"
+              class="rounded-lg border border-ink-200 px-3.5 py-2 text-sm font-medium text-ink-700 transition hover:border-brand-400 hover:text-brand-600"
+            >
+              {labels.next} →
+            </a>
+          )}
+        </nav>
+      )
+    }
+  </div>
+</section>

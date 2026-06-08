@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ServicesHub from '../../components/ServicesHub.astro';
+import { getServices } from '../../data/services';
+
+const services = getServices('fr');
+---
+
+<BaseLayout
+  title="Nos services — Finance, Cloud, Cybersécurité & Télécoms | FinTech Consulting SA"
+  description="Les services de FinTech Consulting SA en Côte d’Ivoire : Finance & FinTech, infrastructure IT & cloud, cybersécurité, télécoms et conseil & formation."
+>
+  <ServicesHub
+    lang="fr"
+    services={services}
+    heading="Toute votre transformation digitale, sous un seul toit"
+    intro="De la finance digitale aux infrastructures critiques, nous couvrons toute la chaîne pour accélérer votre transformation en Côte d’Ivoire."
+  />
+</BaseLayout>

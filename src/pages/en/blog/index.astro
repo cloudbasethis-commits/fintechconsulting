@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogIndex from '../../../components/BlogIndex.astro';
+import { getPosts, totalBlogPages, pageSlice } from '../../../utils/blog';
+
+const allPosts = await getPosts('en');
+const totalPages = totalBlogPages(allPosts.length);
+const posts = pageSlice(allPosts, 1);
+---
+
+<BaseLayout
+  title="Blog — FinTech Consulting SA | Digital finance & tech in Côte d’Ivoire"
+  description="Insights on digital finance, monetics, cybersecurity, cloud and the digital transformation of enterprises in Côte d’Ivoire."
+>
+  <BlogIndex
+    lang="en"
+    posts={posts}
+    currentPage={1}
+    totalPages={totalPages}
+    heading="The FinTech Consulting blog"
+    intro="Digital finance, monetics, cybersecurity and digital transformation: our insights for enterprises in Côte d’Ivoire."
+  />
+</BaseLayout>

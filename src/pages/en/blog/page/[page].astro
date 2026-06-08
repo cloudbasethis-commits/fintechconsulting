@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import BlogIndex from '../../../../components/BlogIndex.astro';
+import { getPosts, totalBlogPages, pageSlice } from '../../../../utils/blog';
+
+export async function getStaticPaths() {
+  const allPosts = await getPosts('en');
+  const totalPages = totalBlogPages(allPosts.length);
+  return Array.from({ length: Math.max(0, totalPages - 1) }, (_, i) => {
+    const page = i + 2;
+    return {
+      params: { page: String(page) },
+      props: { page, totalPages, posts: pageSlice(allPosts, page) },
+    };
+  });
+}
+
+const { page, totalPages, posts } = Astro.props;
+---
+
+<BaseLayout
+  title={`Blog — page ${page} | DIGABLO`}
+  description="Insights on software development, apps, digital marketing and the digital transformation of businesses."
+>
+  <BlogIndex
+    lang="en"
+    posts={posts}
+    currentPage={page}
+    totalPages={totalPages}
+    heading="The DIGABLO blog"
+    intro="Strategy, development, digital marketing and field notes to help grow your business."
+  />
+</BaseLayout>

@@ -1,0 +1,122 @@
+---
+import '@fontsource-variable/space-grotesk';
+import '@fontsource-variable/inter';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getLangFromUrl, alternatePath } from '../i18n/utils';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Image OpenGraph (chemin absolu depuis /public). */
+  image?: string;
+  /** Type de page pour OpenGraph. */
+  type?: 'website' | 'article';
+  /** Empêcher l'indexation (pages utilitaires). */
+  noindex?: boolean;
+  /** Override des URL alternées (hreflang) quand les slugs diffèrent par langue. */
+  alternates?: { fr: string; en: string };
+}
+
+const { title, description, image = '/brand/og-default.png', type = 'website', noindex = false, alternates } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const ogLocale = lang === 'fr' ? 'fr_FR' : 'en_US';
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const frUrl = new URL(alternates ? alternates.fr : alternatePath(Astro.url.pathname, 'fr'), Astro.site).href;
+const enUrl = new URL(alternates ? alternates.en : alternatePath(Astro.url.pathname, 'en'), Astro.site).href;
+const ogImage = new URL(image, Astro.site).href;
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'FinTech Consulting SA',
+  url: 'https://www.fintechconsulting-sa.net',
+  logo: 'https://www.fintechconsulting-sa.net/brand/og-default.png',
+  image: 'https://www.fintechconsulting-sa.net/brand/og-default.png',
+  description:
+    "Cabinet de conseil en transformation digitale, FinTech et infrastructures à Abidjan : Finance & FinTech, infrastructure IT & cloud, cybersécurité, télécoms et formation.",
+  email: 'infos@fintechconsultingsa.com',
+  telephone: '+2252721570865',
+  areaServed: ["Côte d'Ivoire", 'UEMOA', 'Afrique de l’Ouest'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Angré Djorogobité 2, 286',
+    addressLocality: 'Abidjan',
+    addressCountry: 'CI',
+  },
+  contactPoint: [
+    { '@type': 'ContactPoint', telephone: '+2252721570865', contactType: 'customer service', areaServed: 'CI' },
+  ],
+  knowsAbout: [
+    'Finance digitale',
+    'FinTech',
+    'Core Banking',
+    'Monétique',
+    'Cybersécurité',
+    'Cloud',
+    'Télécoms',
+    'Transformation digitale',
+  ],
+  sameAs: ['https://www.linkedin.com/'],
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical} />
+
+    <!-- Alternances de langue (hreflang) -->
+    <link rel="alternate" hreflang="fr-FR" href={frUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={frUrl} />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:site_name" content="FinTech Consulting SA" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <meta name="theme-color" content="#0a1428" />
+    <meta name="generator" content={Astro.generator} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgJsonLd)} is:inline />
+  </head>
+  <body class="antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-white"
+    >
+      {lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}
+    </a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <!-- Vercel Web Analytics (sans cookie, RGPD-friendly) — actif une fois "Analytics" activé dans Vercel -->
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
+  </body>
+</html>

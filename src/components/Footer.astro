@@ -1,0 +1,76 @@
+---
+import { Image } from 'astro:assets';
+import logoLight from '../assets/brand/fintech-logo-light.png';
+import { getLangFromUrl, useTranslations, localizePath, aboutPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const home = localizePath('/', lang);
+const year = 2026;
+
+const services = [
+  { href: localizePath('/services/finance-fintech', lang), label: t('footer.finance') },
+  { href: localizePath('/services/infrastructure-cloud', lang), label: t('footer.infra') },
+  { href: localizePath('/services/cybersecurite', lang), label: t('footer.cyber') },
+  { href: localizePath('/services/telecoms', lang), label: t('footer.telecom') },
+  { href: localizePath('/services/conseil-formation', lang), label: t('footer.conseil') },
+];
+---
+
+<footer class="bg-ink-950 text-ink-300">
+  <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
+    <div class="sm:col-span-2 lg:col-span-1">
+      <Image src={logoLight} alt="FinTech Consulting SA" width={150} densities={[1, 2]} class="h-16 w-auto" />
+      <p class="mt-4 max-w-xs text-sm leading-relaxed text-ink-400">{t('footer.tagline')}</p>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-semibold tracking-wide text-white uppercase">{t('footer.services')}</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        {
+          services.map((s) => (
+            <li>
+              <a href={s.href} class="transition hover:text-brand-400">
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-semibold tracking-wide text-white uppercase">{t('footer.company')}</h2>
+      <ul class="mt-4 space-y-2.5 text-sm">
+        <li><a href={aboutPath(lang)} class="transition hover:text-brand-400">{t('nav.about')}</a></li>
+        <li><a href={`${home}#solutions`} class="transition hover:text-brand-400">{t('footer.solutions')}</a></li>
+        <li><a href={`${home}#references`} class="transition hover:text-brand-400">{lang === 'fr' ? 'Références' : 'References'}</a></li>
+        <li><a href={localizePath('/blog', lang)} class="transition hover:text-brand-400">{t('nav.blog')}</a></li>
+        <li><a href={`${home}#contact`} class="transition hover:text-brand-400">{t('nav.contact')}</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-semibold tracking-wide text-white uppercase">{t('footer.contact')}</h2>
+      <address class="mt-4 space-y-3 text-sm not-italic leading-relaxed">
+        <div>
+          <p class="font-semibold text-white">Abidjan, Côte d’Ivoire</p>
+          <p>Angré Djorogobité 2, 286<br />Abidjan</p>
+          <p><a href="tel:+2252721570865" class="transition hover:text-brand-400">+225 27 21 57 08 65</a></p>
+        </div>
+        <p><a href="mailto:infos@fintechconsultingsa.com" class="transition hover:text-brand-400">infos@fintechconsultingsa.com</a></p>
+        <div class="flex gap-4 pt-1">
+          <a href="https://wa.me/2252722570865" target="_blank" rel="noopener" class="transition hover:text-brand-400">WhatsApp</a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="transition hover:text-brand-400">LinkedIn</a>
+        </div>
+      </address>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 py-5 text-xs text-ink-400 sm:flex-row lg:px-8">
+      <p>© {year} FinTech Consulting SA. {t('footer.rights')}</p>
+      <p>Abidjan · Côte d’Ivoire · UEMOA</p>
+    </div>
+  </div>
+</footer>

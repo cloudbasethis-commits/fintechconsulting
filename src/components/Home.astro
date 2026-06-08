@@ -1,0 +1,290 @@
+---
+import type { HomeContent } from '../data/home';
+import type { Lang } from '../i18n/ui';
+import { localizePath } from '../i18n/utils';
+
+interface Props {
+  content: HomeContent;
+  lang: Lang;
+}
+const { content: c, lang } = Astro.props;
+const servicesHref = localizePath('/services', lang);
+const moreLabel = lang === 'fr' ? 'En savoir plus' : 'Learn more';
+const redirectUrl =
+  lang === 'fr'
+    ? 'https://www.fintechconsulting-sa.net/merci'
+    : 'https://www.fintechconsulting-sa.net/en/thank-you';
+---
+
+<!-- ======================= HERO ======================= -->
+<section class="relative overflow-hidden bg-ink-950 text-white">
+  <div class="glow-teal pointer-events-none absolute inset-0"></div>
+  <div
+    class="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-600/25 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+  <div class="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
+    <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-medium text-teal-200">
+      <span class="h-1.5 w-1.5 rounded-full bg-brand-400"></span>
+      {c.hero.eyebrow}
+    </p>
+    <h1 class="max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+      {c.hero.title} <span class="text-gradient">{c.hero.titleAccent}</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-300">{c.hero.subtitle}</p>
+
+    <div class="mt-9 flex flex-wrap items-center gap-4">
+      <a
+        href="#contact"
+        class="rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition hover:bg-brand-500"
+      >
+        {c.hero.ctaPrimary}
+      </a>
+      <a
+        href="#services"
+        class="rounded-xl border border-white/20 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/10"
+      >
+        {c.hero.ctaSecondary}
+      </a>
+    </div>
+
+    <ul class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-300">
+      {
+        c.hero.badges.map((b) => (
+          <li class="flex items-center gap-2">
+            <svg class="h-5 w-5 text-teal-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
+            {b}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- ======================= SERVICES ======================= -->
+<section id="services" class="bg-white py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.services.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.services.heading}</h2>
+      <p class="mt-4 text-lg text-ink-500">{c.services.subheading}</p>
+      <a
+        href={servicesHref}
+        class="mt-5 inline-flex items-center gap-1.5 font-semibold text-brand-600 hover:text-brand-700"
+      >
+        {c.services.linkLabel}
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="mt-14 space-y-14">
+      {
+        c.services.groups.map((group) => (
+          <div>
+            <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-ink-100 pb-4">
+              <h3 class="text-xl font-semibold text-ink-900">{group.name}</h3>
+              <p class="text-ink-500">{group.tagline}</p>
+            </div>
+            <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {group.items.map((item) => (
+                <a
+                  href={item.slug ? localizePath(`/services/${item.slug}`, lang) : servicesHref}
+                  class="group flex flex-col rounded-2xl border border-ink-100 bg-ink-50/40 p-6 transition hover:border-brand-200 hover:bg-white hover:shadow-lg hover:shadow-ink-900/5"
+                >
+                  <h4 class="text-base font-semibold text-ink-900 group-hover:text-brand-600">{item.title}</h4>
+                  <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{item.desc}</p>
+                  <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-600">
+                    {moreLabel}
+                    <span class="transition group-hover:translate-x-1" aria-hidden="true">→</span>
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ======================= SOLUTIONS ======================= -->
+<section id="solutions" class="relative overflow-hidden bg-teal-950 py-20 text-white lg:py-28">
+  <div class="glow-teal pointer-events-none absolute inset-0"></div>
+  <div class="relative mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold tracking-wide text-teal-300 uppercase">{c.solutions.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-bold sm:text-4xl">{c.solutions.heading}</h2>
+      <p class="mt-4 text-lg leading-relaxed text-teal-50/90">{c.solutions.subheading}</p>
+    </div>
+
+    <div class="mt-12 grid gap-6 lg:grid-cols-2">
+      {
+        c.solutions.items.map((s) => (
+          <article class="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm">
+            <span class="text-xs font-semibold tracking-wide text-teal-300 uppercase">{s.tag}</span>
+            <h3 class="mt-2 text-2xl font-bold text-white">{s.name}</h3>
+            <p class="mt-3 leading-relaxed text-teal-50/85">{s.desc}</p>
+            <ul class="mt-6 space-y-3">
+              {s.features.map((f) => (
+                <li class="flex items-start gap-3 text-sm text-teal-50/90">
+                  <svg class="mt-0.5 h-5 w-5 shrink-0 text-teal-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-10">
+      <a
+        href="#contact"
+        class="inline-block rounded-xl bg-brand-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-brand-500"
+      >
+        {c.hero.ctaPrimary}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= À PROPOS + STATS ======================= -->
+<section id="about" class="bg-white py-20 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-2 lg:px-8">
+    <div>
+      <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.about.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.about.heading}</h2>
+      <div class="mt-5 space-y-4 text-lg leading-relaxed text-ink-600">
+        {c.about.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+    <div class="grid grid-cols-2 gap-5 self-center">
+      {
+        c.about.stats.map((s) => (
+          <div class="rounded-2xl border border-ink-100 bg-ink-50/50 p-7 text-center">
+            <div class="text-gradient text-3xl font-bold sm:text-4xl">{s.value}</div>
+            <div class="mt-2 text-sm font-medium text-ink-500">{s.label}</div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ======================= RÉFÉRENCES ======================= -->
+<section id="references" class="bg-ink-50/60 py-20 lg:py-24">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="max-w-3xl">
+      <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.references.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.references.heading}</h2>
+      <p class="mt-4 text-lg text-ink-500">{c.references.subheading}</p>
+    </div>
+    <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+      {
+        c.references.clients.map((name) => (
+          <div class="flex items-center justify-center rounded-2xl border border-ink-100 bg-white px-4 py-8 text-center text-lg font-bold tracking-wide text-ink-700">
+            {name}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ======================= MÉTHODE ======================= -->
+<section class="bg-white py-20 lg:py-28">
+  <div class="mx-auto max-w-7xl px-5 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.process.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.process.heading}</h2>
+      <p class="mt-4 text-lg text-ink-500">{c.process.subheading}</p>
+    </div>
+    <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        c.process.steps.map((step) => (
+          <li class="rounded-2xl border border-ink-100 bg-ink-50/40 p-6">
+            <h3 class="text-lg font-semibold text-brand-600">{step.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-ink-500">{step.desc}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- ======================= CONTACT ======================= -->
+<section id="contact" class="bg-ink-50/60 py-20 lg:py-28">
+  <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-2 lg:px-8">
+    <div>
+      <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.contact.eyebrow}</p>
+      <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.contact.heading}</h2>
+      <p class="mt-5 text-lg leading-relaxed text-ink-600">{c.contact.intro}</p>
+      <div class="mt-8 space-y-3 text-ink-700">
+        <p class="flex items-center gap-3">
+          <span class="text-brand-600">✉</span>
+          <a href="mailto:infos@fintechconsultingsa.com" class="font-medium hover:text-brand-600">infos@fintechconsultingsa.com</a>
+        </p>
+        <p class="flex items-center gap-3">
+          <span class="text-brand-600">☎</span>
+          <a href="tel:+2252721570865" class="font-medium hover:text-brand-600">+225 27 21 57 08 65</a>
+        </p>
+        <p class="flex items-center gap-3">
+          <span class="text-brand-600">⌖</span>
+          <span>Angré Djorogobité 2, 286 — Abidjan, Côte d’Ivoire</span>
+        </p>
+      </div>
+    </div>
+
+    <form
+      action="https://api.web3forms.com/submit"
+      method="POST"
+      class="rounded-2xl border border-ink-100 bg-white p-6 sm:p-8"
+    >
+      <!-- TODO: remplacer par votre clé d'accès Web3Forms (gratuit, web3forms.com, avec infos@fintechconsultingsa.com) -->
+      <input type="hidden" name="access_key" value="VOTRE_CLE_WEB3FORMS" />
+      <input type="hidden" name="subject" value="Nouveau message depuis fintechconsulting-sa.net" />
+      <input type="hidden" name="from_name" value="Site FinTech Consulting SA" />
+      <input type="hidden" name="redirect" value={redirectUrl} />
+      <!-- Honeypot anti-spam -->
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
+
+      <label class="block">
+        <span class="text-sm font-medium text-ink-700">{c.contact.name}</span>
+        <input
+          type="text"
+          name="name"
+          autocomplete="name"
+          required
+          class="mt-1.5 w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-ink-900 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+        />
+      </label>
+      <label class="mt-4 block">
+        <span class="text-sm font-medium text-ink-700">{c.contact.email}</span>
+        <input
+          type="email"
+          name="email"
+          autocomplete="email"
+          required
+          class="mt-1.5 w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-ink-900 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+        />
+      </label>
+      <label class="mt-4 block">
+        <span class="text-sm font-medium text-ink-700">{c.contact.message}</span>
+        <textarea
+          name="message"
+          rows="4"
+          required
+          class="mt-1.5 w-full rounded-xl border border-ink-200 bg-white px-4 py-3 text-ink-900 outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-200"
+        ></textarea>
+      </label>
+      <button
+        type="submit"
+        class="mt-5 w-full rounded-xl bg-brand-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700"
+      >
+        {c.contact.submit}
+      </button>
+      <p class="mt-3 text-center text-xs text-ink-500">{c.contact.note}</p>
+    </form>
+  </div>
+</section>

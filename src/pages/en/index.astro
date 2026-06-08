@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Home from '../../components/Home.astro';
+import { homeContent } from '../../data/home';
+
+const c = homeContent.en;
+---
+
+<BaseLayout title={c.seoTitle} description={c.seoDescription}>
+  <Home content={c} lang="en" />
+</BaseLayout>

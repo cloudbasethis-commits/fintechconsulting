@@ -1,0 +1,73 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { Post } from '../utils/blog';
+import { readingTime, formatDate } from '../utils/blog';
+import { useTranslations, localizePath } from '../i18n/utils';
+import type { Lang } from '../i18n/ui';
+
+interface Props {
+  post: Post;
+  lang: Lang;
+}
+const { post, lang } = Astro.props;
+const t = useTranslations(lang);
+const { title, description, pubDate, author, tags, cover } = post.data;
+const coverSrc = cover ? (typeof cover === 'string' ? cover : cover.src) : undefined;
+
+const articleJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  author: { '@type': 'Organization', name: author },
+  publisher: {
+    '@type': 'Organization',
+    name: 'FinTech Consulting SA',
+    logo: { '@type': 'ImageObject', url: 'https://www.fintechconsulting-sa.net/brand/og-default.png' },
+  },
+};
+---
+
+<BaseLayout title={`${title} — FinTech Consulting SA`} description={description} type="article" image={coverSrc}>
+  <article class="bg-white py-16 lg:py-20">
+    <div class="mx-auto max-w-3xl px-5 lg:px-8">
+      <a href={localizePath('/blog', lang)} class="text-sm font-medium text-brand-600 hover:text-brand-700">
+        {t('common.backToBlog')}
+      </a>
+
+      <header class="mt-6">
+        <div class="flex flex-wrap gap-2">
+          {tags.map((tag) => <span class="rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-medium text-brand-700">{tag}</span>)}
+        </div>
+        <h1 class="mt-4 text-3xl font-bold leading-tight text-ink-950 sm:text-4xl">{title}</h1>
+        <p class="mt-4 text-sm text-ink-500">
+          {t('common.published')} {formatDate(pubDate, lang)} · {readingTime(post.body)} {t('common.minRead')} · {author}
+        </p>
+      </header>
+
+      {
+        coverSrc && (
+          <img src={coverSrc} alt={title} class="mt-8 aspect-[16/9] w-full rounded-2xl object-cover" />
+        )
+      }
+
+      <div class="article-body mt-10">
+        <slot />
+      </div>
+
+      <hr class="mt-12 border-ink-100" />
+      <div class="mt-8 rounded-2xl bg-ink-950 p-8 text-center text-white">
+        <h2 class="text-xl font-bold">{t('common.talk')}</h2>
+        <a
+          href={`${localizePath('/', lang)}#contact`}
+          class="mt-5 inline-block rounded-xl bg-brand-600 px-6 py-3 font-semibold text-white transition hover:bg-brand-500"
+        >
+          {t('nav.cta')}
+        </a>
+      </div>
+    </div>
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify(articleJsonLd)} is:inline />
+</BaseLayout>

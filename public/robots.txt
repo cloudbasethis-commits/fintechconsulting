@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.fintechconsulting-sa.net/sitemap-index.xml
