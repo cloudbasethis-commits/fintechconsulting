@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SolutionDetail from '../../../components/SolutionDetail.astro';
+import { getSolutionDetails } from '../../../data/solutions';
+
+export async function getStaticPaths() {
+  return getSolutionDetails('en').map((solution) => ({
+    params: { slug: solution.slug },
+    props: { solution },
+  }));
+}
+
+const { solution } = Astro.props;
+---
+
+<BaseLayout title={solution.metaTitle} description={solution.metaDescription}>
+  <SolutionDetail lang="en" solution={solution} />
+</BaseLayout>

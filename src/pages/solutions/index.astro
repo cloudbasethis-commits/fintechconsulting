@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SolutionsHub from '../../components/SolutionsHub.astro';
+import { getSolutionsHub } from '../../data/solutions';
+
+const hub = getSolutionsHub('fr');
+---
+
+<BaseLayout
+  title="Nos solutions — Core Banking, Switch monétique & produits | FinTech Consulting SA"
+  description="Les solutions de FinTech Consulting SA : Core Banking Digital, Switch monétique (GIM-UEMOA), digabloPos et Surestaria — des produits souverains pensés pour l'Afrique."
+>
+  <SolutionsHub lang="fr" heading={hub.heading} intro={hub.intro} items={hub.items} />
+</BaseLayout>

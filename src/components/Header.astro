@@ -9,7 +9,7 @@ const home = localizePath('/', lang);
 
 const navLinks = [
   { href: localizePath('/services', lang), label: t('nav.services') },
-  { href: `${home}#solutions`, label: t('nav.solutions') },
+  { href: localizePath('/solutions', lang), label: t('nav.solutions') },
   { href: aboutPath(lang), label: t('nav.about') },
   { href: localizePath('/blog', lang), label: t('nav.blog') },
   { href: `${home}#contact`, label: t('nav.contact') },

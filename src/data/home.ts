@@ -17,6 +17,8 @@ export interface SolutionItem {
   tag: string;
   desc: string;
   features: string[];
+  /** Fiche détaillée interne (/solutions/<slug>). */
+  slug?: string;
   /** Lien externe vers le produit (affiche un CTA « Visiter le site »). */
   href?: string;
   cta?: string;
@@ -149,6 +151,8 @@ export const homeContent: Record<Lang, HomeContent> = {
             'Intégration mobile money et paiements marchands',
             'Conçu pour la conformité BCEAO / UEMOA',
           ],
+          slug: 'core-banking',
+          cta: 'En savoir plus',
         },
         {
           name: 'Switch Monétique',
@@ -160,6 +164,8 @@ export const homeContent: Record<Lang, HomeContent> = {
             'Compatibilité cartes et GIM-UEMOA',
             'Supervision et haute disponibilité',
           ],
+          slug: 'switch-monetique',
+          cta: 'En savoir plus',
         },
         {
           name: 'digabloPos',
@@ -316,6 +322,8 @@ export const homeContent: Record<Lang, HomeContent> = {
             'Mobile money and merchant payment integration',
             'Designed for BCEAO / WAEMU compliance',
           ],
+          slug: 'core-banking',
+          cta: 'Learn more',
         },
         {
           name: 'Card Switch',
@@ -327,6 +335,8 @@ export const homeContent: Record<Lang, HomeContent> = {
             'Card and GIM-WAEMU compatibility',
             'Monitoring and high availability',
           ],
+          slug: 'switch-monetique',
+          cta: 'Learn more',
         },
         {
           name: 'digabloPos',

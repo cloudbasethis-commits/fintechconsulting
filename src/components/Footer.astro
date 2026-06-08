@@ -43,7 +43,7 @@ const services = [
       <h2 class="text-sm font-semibold tracking-wide text-white uppercase">{t('footer.company')}</h2>
       <ul class="mt-4 space-y-2.5 text-sm">
         <li><a href={aboutPath(lang)} class="transition hover:text-brand-400">{t('nav.about')}</a></li>
-        <li><a href={`${home}#solutions`} class="transition hover:text-brand-400">{t('footer.solutions')}</a></li>
+        <li><a href={localizePath('/solutions', lang)} class="transition hover:text-brand-400">{t('footer.solutions')}</a></li>
         <li><a href={`${home}#references`} class="transition hover:text-brand-400">{lang === 'fr' ? 'Références' : 'References'}</a></li>
         <li><a href={localizePath('/blog', lang)} class="transition hover:text-brand-400">{t('nav.blog')}</a></li>
         <li><a href={`${home}#contact`} class="transition hover:text-brand-400">{t('nav.contact')}</a></li>

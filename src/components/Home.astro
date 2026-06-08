@@ -9,7 +9,9 @@ interface Props {
 }
 const { content: c, lang } = Astro.props;
 const servicesHref = localizePath('/services', lang);
+const solutionsHref = localizePath('/solutions', lang);
 const moreLabel = lang === 'fr' ? 'En savoir plus' : 'Learn more';
+const allSolutionsLabel = lang === 'fr' ? 'Voir toutes nos solutions' : 'See all our solutions';
 const redirectUrl =
   lang === 'fr'
     ? 'https://www.fintechconsulting-sa.net/merci'
@@ -182,6 +184,13 @@ const bars = [38, 62, 50, 78, 64, 90];
       <p class="text-sm font-semibold tracking-wide text-teal-300 uppercase">{c.solutions.eyebrow}</p>
       <h2 class="mt-3 text-3xl font-bold sm:text-4xl">{c.solutions.heading}</h2>
       <p class="mt-4 text-lg leading-relaxed text-teal-50/90">{c.solutions.subheading}</p>
+      <a
+        href={solutionsHref}
+        class="mt-5 inline-flex items-center gap-1.5 font-semibold text-teal-300 hover:text-teal-200"
+      >
+        {allSolutionsLabel}
+        <span aria-hidden="true">→</span>
+      </a>
     </div>
 
     <div class="mt-12 grid gap-6 lg:grid-cols-2">
@@ -199,15 +208,14 @@ const bars = [38, 62, 50, 78, 64, 90];
                 </li>
               ))}
             </ul>
-            {s.href && (
+            {(s.slug || s.href) && (
               <a
-                href={s.href}
-                target="_blank"
-                rel="noopener"
+                href={s.slug ? localizePath(`/solutions/${s.slug}`, lang) : s.href}
+                {...(s.href && !s.slug ? { target: '_blank', rel: 'noopener' } : {})}
                 class="mt-6 inline-flex items-center gap-1.5 self-start text-sm font-semibold text-teal-300 transition hover:text-teal-200"
               >
                 {s.cta}
-                <span aria-hidden="true">↗</span>
+                <span aria-hidden="true">{s.slug ? '→' : '↗'}</span>
               </a>
             )}
           </article>
