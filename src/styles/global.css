@@ -92,6 +92,50 @@ h1, h2, h3, h4 {
   background: radial-gradient(60% 60% at 50% 0%, rgba(54, 200, 158, 0.16), transparent 70%);
 }
 
+/* ----------------------------------------------------------------------------
+   Animations — CSS pur, GPU-friendly (opacity/transform), zéro JS, zéro CLS.
+   Tout est désactivé si l'utilisateur préfère réduire les animations.
+---------------------------------------------------------------------------- */
+@keyframes fc-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrée en cascade au chargement (hero) */
+  .fc-rise { opacity: 0; animation: fc-rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .fc-d1 { animation-delay: 0.06s; }
+  .fc-d2 { animation-delay: 0.14s; }
+  .fc-d3 { animation-delay: 0.22s; }
+  .fc-d4 { animation-delay: 0.30s; }
+  .fc-d5 { animation-delay: 0.40s; }
+
+  /* Révélation au défilement — pur CSS (scroll-driven), avec repli sûr :
+     si animation-timeline n'est pas supporté, l'élément reste visible. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: fc-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+  }
+
+  /* Pulsation du point « temps réel » */
+  @keyframes fc-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: 0.4; transform: scale(0.7); }
+  }
+  .fc-pulse { animation: fc-pulse 1.8s ease-in-out infinite; }
+
+  /* Défilement continu des références (marquee) */
+  @keyframes fc-marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .fc-marquee-track { animation: fc-marquee 32s linear infinite; }
+  .fc-marquee:hover .fc-marquee-track { animation-play-state: paused; }
+}
+
 /* ---- Typographie d'article (prose maison, sans plugin) ---- */
 .article-body {
   color: var(--color-ink-700);

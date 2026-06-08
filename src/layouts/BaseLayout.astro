@@ -120,6 +120,38 @@ const orgJsonLd = {
       <slot />
     </main>
     <Footer />
+    <!-- Compteurs animés des chiffres clés (.js-count) — minuscule, respecte reduced-motion -->
+    <script is:inline>
+      (function () {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (!('IntersectionObserver' in window)) return;
+        var els = document.querySelectorAll('.js-count');
+        els.forEach(function (el) {
+          var raw = (el.textContent || '').trim();
+          if (!/^\d+$/.test(raw)) return; // n'anime que les entiers
+          var target = parseInt(raw, 10);
+          el.textContent = '0';
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              io.unobserve(el);
+              var start = null;
+              var dur = 1100;
+              function step(ts) {
+                if (!start) start = ts;
+                var p = Math.min((ts - start) / dur, 1);
+                el.textContent = String(Math.round((1 - Math.pow(1 - p, 3)) * target));
+                if (p < 1) requestAnimationFrame(step);
+                else el.textContent = raw;
+              }
+              requestAnimationFrame(step);
+            });
+          }, { threshold: 0.4 });
+          io.observe(el);
+        });
+      })();
+    </script>
+
     <!-- Vercel Web Analytics (sans cookie, RGPD-friendly) — actif une fois "Analytics" activé dans Vercel -->
     <script is:inline defer src="/_vercel/insights/script.js"></script>
   </body>

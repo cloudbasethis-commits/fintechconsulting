@@ -14,6 +14,18 @@ const redirectUrl =
   lang === 'fr'
     ? 'https://www.fintechconsulting-sa.net/merci'
     : 'https://www.fintechconsulting-sa.net/en/thank-you';
+
+// Icônes par pôle de services (SVG inline, stroke = currentColor)
+const groupIcons: Record<string, string> = {
+  finance: '<path d="M3 7h18v10H3z"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/>',
+  tech: '<path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/>',
+  conseil: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.2 4.8-4.8 2.2 2.2-4.8 4.8-2.2z"/>',
+};
+const dashLabels =
+  lang === 'fr'
+    ? { board: 'Tableau de bord', vol: 'Volume transactions', uptime: 'Disponibilité', realtime: 'Temps réel', compliant: 'Conformité BCEAO · UEMOA' }
+    : { board: 'Dashboard', vol: 'Transaction volume', uptime: 'Uptime', realtime: 'Real time', compliant: 'BCEAO · WAEMU compliant' };
+const bars = [38, 62, 50, 78, 64, 90];
 ---
 
 <!-- ======================= HERO ======================= -->
@@ -24,48 +36,97 @@ const redirectUrl =
     aria-hidden="true"
   >
   </div>
-  <div class="relative mx-auto max-w-7xl px-5 py-20 lg:px-8 lg:py-28">
-    <p class="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-medium text-teal-200">
-      <span class="h-1.5 w-1.5 rounded-full bg-brand-400"></span>
-      {c.hero.eyebrow}
-    </p>
-    <h1 class="max-w-4xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-      {c.hero.title} <span class="text-gradient">{c.hero.titleAccent}</span>
-    </h1>
-    <p class="mt-6 max-w-2xl text-lg leading-relaxed text-ink-300">{c.hero.subtitle}</p>
+  <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-28">
+    <div>
+      <p class="fc-rise fc-d1 mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-medium text-teal-200">
+        <span class="h-1.5 w-1.5 rounded-full bg-teal-400 fc-pulse"></span>
+        {c.hero.eyebrow}
+      </p>
+      <h1 class="fc-rise fc-d2 max-w-2xl text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
+        {c.hero.title} <span class="text-gradient">{c.hero.titleAccent}</span>
+      </h1>
+      <p class="fc-rise fc-d3 mt-6 max-w-xl text-lg leading-relaxed text-ink-300">{c.hero.subtitle}</p>
 
-    <div class="mt-9 flex flex-wrap items-center gap-4">
-      <a
-        href="#contact"
-        class="rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition hover:bg-brand-500"
-      >
-        {c.hero.ctaPrimary}
-      </a>
-      <a
-        href="#services"
-        class="rounded-xl border border-white/20 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/10"
-      >
-        {c.hero.ctaSecondary}
-      </a>
+      <div class="fc-rise fc-d4 mt-9 flex flex-wrap items-center gap-4">
+        <a
+          href="#contact"
+          class="rounded-xl bg-brand-600 px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition hover:bg-brand-500"
+        >
+          {c.hero.ctaPrimary}
+        </a>
+        <a
+          href="#services"
+          class="rounded-xl border border-white/20 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/10"
+        >
+          {c.hero.ctaSecondary}
+        </a>
+      </div>
+
+      <ul class="fc-rise fc-d5 mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-300">
+        {
+          c.hero.badges.map((b) => (
+            <li class="flex items-center gap-2">
+              <svg class="h-5 w-5 text-teal-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
+              {b}
+            </li>
+          ))
+        }
+      </ul>
     </div>
 
-    <ul class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-300">
-      {
-        c.hero.badges.map((b) => (
-          <li class="flex items-center gap-2">
-            <svg class="h-5 w-5 text-teal-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
-            {b}
-          </li>
-        ))
-      }
-    </ul>
+    <!-- Visuel "dashboard fintech" (décoratif, lg+ uniquement) -->
+    <div class="fc-rise fc-d3 relative hidden h-[420px] lg:block" aria-hidden="true">
+      <div class="absolute right-4 top-2 h-64 w-64 rounded-full border border-teal-400/15"></div>
+      <div class="absolute right-16 top-14 h-40 w-40 rounded-full border border-brand-400/15"></div>
+
+      <!-- Carte principale -->
+      <div class="absolute left-2 top-10 w-[20rem] rounded-2xl border border-white/10 bg-white/[0.06] p-5 shadow-2xl shadow-black/40 backdrop-blur-md">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold uppercase tracking-wide text-teal-300">{dashLabels.board}</span>
+          <span class="flex gap-1"><span class="h-1.5 w-1.5 rounded-full bg-white/30"></span><span class="h-1.5 w-1.5 rounded-full bg-white/30"></span><span class="h-1.5 w-1.5 rounded-full bg-white/30"></span></span>
+        </div>
+        <div class="mt-5 flex h-24 items-end gap-2">
+          {bars.map((h) => (
+            <div class="flex-1 rounded-t bg-gradient-to-t from-brand-600 to-teal-400" style={`height:${h}%`}></div>
+          ))}
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-3 text-xs">
+          <div class="rounded-lg bg-white/5 p-3">
+            <p class="text-ink-300">{dashLabels.vol}</p>
+            <p class="mt-1 text-base font-bold text-white">+128%</p>
+          </div>
+          <div class="rounded-lg bg-white/5 p-3">
+            <p class="text-ink-300">{dashLabels.uptime}</p>
+            <p class="mt-1 text-base font-bold text-white">99,9%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carte flottante "temps réel" -->
+      <div class="absolute right-0 top-0 w-52 rounded-2xl border border-white/10 bg-ink-900/80 p-4 shadow-xl shadow-black/40 backdrop-blur-md">
+        <div class="flex items-center gap-2">
+          <span class="h-2 w-2 rounded-full bg-teal-400 fc-pulse"></span>
+          <span class="text-xs font-semibold text-white">Switch monétique</span>
+        </div>
+        <p class="mt-2 text-xs text-ink-300">GIM-UEMOA · {dashLabels.realtime}</p>
+        <div class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+          <div class="h-full w-3/4 rounded-full bg-gradient-to-r from-brand-500 to-teal-400"></div>
+        </div>
+      </div>
+
+      <!-- Pastille conformité -->
+      <div class="absolute bottom-2 left-10 flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-400/10 px-4 py-2 text-xs font-semibold text-teal-200 backdrop-blur-md">
+        <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 011.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" clip-rule="evenodd"/></svg>
+        {dashLabels.compliant}
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- ======================= SERVICES ======================= -->
 <section id="services" class="bg-white py-20 lg:py-28">
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
-    <div class="max-w-2xl">
+    <div class="reveal max-w-2xl">
       <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.services.eyebrow}</p>
       <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.services.heading}</h2>
       <p class="mt-4 text-lg text-ink-500">{c.services.subheading}</p>
@@ -81,16 +142,21 @@ const redirectUrl =
     <div class="mt-14 space-y-14">
       {
         c.services.groups.map((group) => (
-          <div>
-            <div class="mb-6 flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-ink-100 pb-4">
-              <h3 class="text-xl font-semibold text-ink-900">{group.name}</h3>
-              <p class="text-ink-500">{group.tagline}</p>
+          <div class="reveal">
+            <div class="mb-6 flex items-center gap-4 border-b border-ink-100 pb-4">
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6" set:html={groupIcons[group.id]} />
+              </span>
+              <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                <h3 class="text-xl font-semibold text-ink-900">{group.name}</h3>
+                <p class="text-ink-500">{group.tagline}</p>
+              </div>
             </div>
             <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
               {group.items.map((item) => (
                 <a
                   href={item.slug ? localizePath(`/services/${item.slug}`, lang) : servicesHref}
-                  class="group flex flex-col rounded-2xl border border-ink-100 bg-ink-50/40 p-6 transition hover:border-brand-200 hover:bg-white hover:shadow-lg hover:shadow-ink-900/5"
+                  class="group flex flex-col rounded-2xl border border-ink-100 bg-ink-50/40 p-6 transition hover:-translate-y-1 hover:border-brand-200 hover:bg-white hover:shadow-lg hover:shadow-ink-900/5"
                 >
                   <h4 class="text-base font-semibold text-ink-900 group-hover:text-brand-600">{item.title}</h4>
                   <p class="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{item.desc}</p>
@@ -112,7 +178,7 @@ const redirectUrl =
 <section id="solutions" class="relative overflow-hidden bg-teal-950 py-20 text-white lg:py-28">
   <div class="glow-teal pointer-events-none absolute inset-0"></div>
   <div class="relative mx-auto max-w-7xl px-5 lg:px-8">
-    <div class="max-w-3xl">
+    <div class="reveal max-w-3xl">
       <p class="text-sm font-semibold tracking-wide text-teal-300 uppercase">{c.solutions.eyebrow}</p>
       <h2 class="mt-3 text-3xl font-bold sm:text-4xl">{c.solutions.heading}</h2>
       <p class="mt-4 text-lg leading-relaxed text-teal-50/90">{c.solutions.subheading}</p>
@@ -121,7 +187,7 @@ const redirectUrl =
     <div class="mt-12 grid gap-6 lg:grid-cols-2">
       {
         c.solutions.items.map((s) => (
-          <article class="flex flex-col rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm">
+          <article class="reveal flex flex-col rounded-2xl border border-white/10 bg-white/5 p-7 backdrop-blur-sm transition hover:border-teal-400/30 hover:bg-white/[0.08]">
             <span class="text-xs font-semibold tracking-wide text-teal-300 uppercase">{s.tag}</span>
             <h3 class="mt-2 text-2xl font-bold text-white">{s.name}</h3>
             <p class="mt-3 leading-relaxed text-teal-50/85">{s.desc}</p>
@@ -152,7 +218,7 @@ const redirectUrl =
 <!-- ======================= À PROPOS + STATS ======================= -->
 <section id="about" class="bg-white py-20 lg:py-28">
   <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-2 lg:px-8">
-    <div>
+    <div class="reveal">
       <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.about.eyebrow}</p>
       <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.about.heading}</h2>
       <div class="mt-5 space-y-4 text-lg leading-relaxed text-ink-600">
@@ -162,8 +228,8 @@ const redirectUrl =
     <div class="grid grid-cols-2 gap-5 self-center">
       {
         c.about.stats.map((s) => (
-          <div class="rounded-2xl border border-ink-100 bg-ink-50/50 p-7 text-center">
-            <div class="text-gradient text-3xl font-bold sm:text-4xl">{s.value}</div>
+          <div class="reveal rounded-2xl border border-ink-100 bg-ink-50/50 p-7 text-center">
+            <div class="js-count text-gradient text-3xl font-bold sm:text-4xl">{s.value}</div>
             <div class="mt-2 text-sm font-medium text-ink-500">{s.label}</div>
           </div>
         ))
@@ -175,44 +241,49 @@ const redirectUrl =
 <!-- ======================= RÉFÉRENCES ======================= -->
 <section id="references" class="bg-ink-50/60 py-20 lg:py-24">
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
-    <div class="max-w-3xl">
+    <div class="reveal max-w-3xl">
       <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.references.eyebrow}</p>
       <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.references.heading}</h2>
       <p class="mt-4 text-lg text-ink-500">{c.references.subheading}</p>
     </div>
-    <div class="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-      {
-        c.references.clients.map((client) => (
-          <div class="flex items-center justify-center rounded-2xl border border-ink-100 bg-white p-6">
-            <img
-              src={client.logo}
-              alt={client.name}
-              loading="lazy"
-              class="max-h-16 w-auto object-contain"
-            />
-          </div>
-        ))
-      }
+    <!-- Bandeau défilant (marquee) : logos dupliqués pour une boucle continue -->
+    <div class="fc-marquee mt-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]">
+      <div class="fc-marquee-track flex w-max gap-4">
+        {
+          [...c.references.clients, ...c.references.clients].map((client) => (
+            <div class="flex h-28 w-44 shrink-0 items-center justify-center rounded-2xl border border-ink-100 bg-white p-6">
+              <img src={client.logo} alt={client.name} loading="lazy" class="max-h-14 w-auto object-contain" />
+            </div>
+          ))
+        }
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ======================= MÉTHODE ======================= -->
+<!-- ======================= MÉTHODE (timeline) ======================= -->
 <section class="bg-white py-20 lg:py-28">
   <div class="mx-auto max-w-7xl px-5 lg:px-8">
-    <div class="max-w-2xl">
+    <div class="reveal max-w-2xl">
       <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.process.eyebrow}</p>
       <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.process.heading}</h2>
       <p class="mt-4 text-lg text-ink-500">{c.process.subheading}</p>
     </div>
-    <ol class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <ol class="relative mt-14 grid gap-10 lg:grid-cols-4 lg:gap-6">
+      <div class="pointer-events-none absolute left-6 top-6 hidden h-px w-full bg-gradient-to-r from-brand-300 via-teal-300 to-transparent lg:block" aria-hidden="true"></div>
       {
-        c.process.steps.map((step) => (
-          <li class="rounded-2xl border border-ink-100 bg-ink-50/40 p-6">
-            <h3 class="text-lg font-semibold text-brand-600">{step.title}</h3>
-            <p class="mt-2 text-sm leading-relaxed text-ink-500">{step.desc}</p>
-          </li>
-        ))
+        c.process.steps.map((step, i) => {
+          const label = step.title.includes('·') ? step.title.split('·')[1].trim() : step.title;
+          return (
+            <li class="reveal relative">
+              <span class="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-brand-600 text-lg font-bold text-white ring-4 ring-white">
+                {i + 1}
+              </span>
+              <h3 class="mt-5 text-lg font-semibold text-ink-900">{label}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink-500">{step.desc}</p>
+            </li>
+          );
+        })
       }
     </ol>
   </div>
@@ -221,7 +292,7 @@ const redirectUrl =
 <!-- ======================= CONTACT ======================= -->
 <section id="contact" class="bg-ink-50/60 py-20 lg:py-28">
   <div class="mx-auto grid max-w-7xl gap-12 px-5 lg:grid-cols-2 lg:px-8">
-    <div>
+    <div class="reveal">
       <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{c.contact.eyebrow}</p>
       <h2 class="mt-3 text-3xl font-bold text-ink-950 sm:text-4xl">{c.contact.heading}</h2>
       <p class="mt-5 text-lg leading-relaxed text-ink-600">{c.contact.intro}</p>
@@ -244,7 +315,7 @@ const redirectUrl =
     <form
       action="https://api.web3forms.com/submit"
       method="POST"
-      class="rounded-2xl border border-ink-100 bg-white p-6 sm:p-8"
+      class="reveal rounded-2xl border border-ink-100 bg-white p-6 sm:p-8"
     >
       <!-- TODO: remplacer par votre clé d'accès Web3Forms (gratuit, web3forms.com, avec infos@fintechconsultingsa.com) -->
       <input type="hidden" name="access_key" value="VOTRE_CLE_WEB3FORMS" />
