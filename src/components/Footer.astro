@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import logoLight from '../assets/brand/fintech-logo-light.png';
+import logoIconLight from '../assets/brand/fintech-icon-light.png';
 import { getLangFromUrl, useTranslations, localizePath, aboutPath } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
@@ -20,7 +20,13 @@ const services = [
 <footer class="bg-ink-950 text-ink-300">
   <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:grid-cols-2 lg:grid-cols-4 lg:px-8">
     <div class="sm:col-span-2 lg:col-span-1">
-      <Image src={logoLight} alt="FinTech Consulting SA" width={150} densities={[1, 2]} class="h-16 w-auto" />
+      <div class="flex items-center gap-2.5">
+        <Image src={logoIconLight} alt="FinTech Consulting SA" width={52} densities={[1, 2]} class="h-12 w-auto" />
+        <span class="leading-none">
+          <span class="block font-display text-lg font-extrabold tracking-tight text-white">FinTech</span>
+          <span class="block font-display text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-teal-300">Consulting</span>
+        </span>
+      </div>
       <p class="mt-4 max-w-xs text-sm leading-relaxed text-ink-400">{t('footer.tagline')}</p>
     </div>
 
