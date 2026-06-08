@@ -17,6 +17,9 @@ export interface SolutionItem {
   tag: string;
   desc: string;
   features: string[];
+  /** Lien externe vers le produit (affiche un CTA « Visiter le site »). */
+  href?: string;
+  cta?: string;
 }
 export interface HomeContent {
   seoTitle: string;
@@ -59,7 +62,7 @@ export interface HomeContent {
     eyebrow: string;
     heading: string;
     subheading: string;
-    clients: { name: string; logo: string }[];
+    clients: { name: string; logo: string; href?: string }[];
   };
   contact: {
     eyebrow: string;
@@ -132,9 +135,9 @@ export const homeContent: Record<Lang, HomeContent> = {
     },
     solutions: {
       eyebrow: 'Nos solutions',
-      heading: 'Des produits pensés pour la finance africaine',
+      heading: 'Des solutions digitales pensées pour l’Afrique',
       subheading:
-        'Au-delà du conseil, nous concevons et déployons des solutions financières souveraines, sécurisées et conformes au cadre réglementaire de l’UEMOA.',
+        'Au-delà du conseil, nous concevons et déployons des produits souverains, sécurisés et adaptés aux réalités africaines — de la finance au commerce et à la logistique.',
       items: [
         {
           name: 'Core Banking Digital',
@@ -157,6 +160,32 @@ export const homeContent: Record<Lang, HomeContent> = {
             'Compatibilité cartes et GIM-UEMOA',
             'Supervision et haute disponibilité',
           ],
+        },
+        {
+          name: 'digabloPos',
+          tag: 'Point de vente · Mobile money · Hors ligne',
+          desc: 'Logiciel de caisse moderne pour commerces, restaurants et cafés. Plan gratuit disponible, paiement mobile money intégré, et fonctionne même sans connexion.',
+          features: [
+            'Encaissement rapide sur mobile, tablette ou ordinateur',
+            'Paiement mobile money intégré',
+            'Mode hors ligne avec synchronisation automatique',
+            'Gestion des stocks et rapports en temps réel',
+          ],
+          href: 'https://digablopos.fr/',
+          cta: 'Visiter le site',
+        },
+        {
+          name: 'Surestaria',
+          tag: 'Transit & douane · Facturation · Afrique',
+          desc: 'Logiciel de gestion des surestaries pour transitaires et commissionnaires en douane : suivi des conteneurs, des dossiers et facturation multi-devises.',
+          features: [
+            'Calcul automatisé des surestaries (demurrage)',
+            'Suivi des conteneurs et des dossiers',
+            'Facturation multi-devises (USD, EUR, FCFA…)',
+            'Conçu pour l’Afrique subsaharienne',
+          ],
+          href: 'https://surestaria.com/',
+          cta: 'Visiter le site',
         },
       ],
     },
@@ -198,6 +227,9 @@ export const homeContent: Record<Lang, HomeContent> = {
         { name: 'Addoha', logo: '/clients/addoha.png' },
         { name: '2AT', logo: '/clients/2at.png' },
         { name: 'ICWP', logo: '/clients/icwp.png' },
+        { name: 'digabloPos', logo: '/clients/digablopos.png', href: 'https://digablopos.fr/' },
+        { name: 'DIGABLO', logo: '/clients/digablo.png', href: 'https://digablo.fr/' },
+        { name: 'Surestaria', logo: '/clients/surestaria.png', href: 'https://surestaria.com/' },
       ],
     },
     contact: {
@@ -270,9 +302,9 @@ export const homeContent: Record<Lang, HomeContent> = {
     },
     solutions: {
       eyebrow: 'Our solutions',
-      heading: 'Products built for African finance',
+      heading: 'Digital solutions built for Africa',
       subheading:
-        'Beyond consulting, we design and deploy sovereign, secure financial solutions compliant with the WAEMU regulatory framework.',
+        'Beyond consulting, we design and deploy sovereign, secure products adapted to African realities — from finance to retail and logistics.',
       items: [
         {
           name: 'Digital Core Banking',
@@ -295,6 +327,32 @@ export const homeContent: Record<Lang, HomeContent> = {
             'Card and GIM-WAEMU compatibility',
             'Monitoring and high availability',
           ],
+        },
+        {
+          name: 'digabloPos',
+          tag: 'Point of sale · Mobile money · Offline',
+          desc: 'Modern POS software for retail, restaurants and cafés. Free plan available, built-in mobile money payments, and it works even offline.',
+          features: [
+            'Fast checkout on mobile, tablet or computer',
+            'Built-in mobile money payments',
+            'Offline mode with automatic sync',
+            'Real-time inventory and reports',
+          ],
+          href: 'https://digablopos.fr/',
+          cta: 'Visit the site',
+        },
+        {
+          name: 'Surestaria',
+          tag: 'Freight & customs · Billing · Africa',
+          desc: 'Demurrage management software for freight forwarders and customs brokers: container tracking, case management and multi-currency billing.',
+          features: [
+            'Automated demurrage calculation',
+            'Container and case tracking',
+            'Multi-currency billing (USD, EUR, FCFA…)',
+            'Built for sub-Saharan Africa',
+          ],
+          href: 'https://surestaria.com/',
+          cta: 'Visit the site',
         },
       ],
     },
@@ -336,6 +394,9 @@ export const homeContent: Record<Lang, HomeContent> = {
         { name: 'Addoha', logo: '/clients/addoha.png' },
         { name: '2AT', logo: '/clients/2at.png' },
         { name: 'ICWP', logo: '/clients/icwp.png' },
+        { name: 'digabloPos', logo: '/clients/digablopos.png', href: 'https://digablopos.fr/' },
+        { name: 'DIGABLO', logo: '/clients/digablo.png', href: 'https://digablo.fr/' },
+        { name: 'Surestaria', logo: '/clients/surestaria.png', href: 'https://surestaria.com/' },
       ],
     },
     contact: {
