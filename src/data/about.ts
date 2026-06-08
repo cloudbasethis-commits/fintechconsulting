@@ -4,6 +4,8 @@ export interface TeamMember {
   name: string;
   role: string;
   focus: string;
+  /** Photo dans /public/team/ (ex: '/team/miriame-ariane-fernandez.jpg'). Repli sur initiales si absent. */
+  photo?: string;
 }
 export interface AboutContent {
   metaTitle: string;
@@ -57,7 +59,7 @@ export const aboutContent: Record<Lang, AboutContent> = {
       heading: 'Une équipe de direction expérimentée',
       intro: 'Des expertises complémentaires au service de votre transformation.',
       members: [
-        { name: 'Miriame Ariane Fernandez', role: 'Directrice Générale', focus: 'Direction stratégique, pilotage opérationnel et coordination des équipes.' },
+        { name: 'Miriame Ariane Fernandez', role: 'Directrice Générale', focus: 'Direction stratégique, pilotage opérationnel et coordination des équipes.', photo: '/team/miriame-ariane-fernandez.jpeg' },
         { name: 'Adonis Dinga', role: 'Directeur Commercial & Marketing', focus: 'Stratégie marketing, acquisition clients et développement des partenariats.' },
         { name: 'Samba Sidibe', role: 'Directeur Informatique', focus: 'Architecture technique, déploiement des infrastructures et cybersécurité.' },
         { name: 'Anne Nguessan', role: 'Directrice Juridique', focus: 'Conformité réglementaire, protection des données et gestion des contrats.' },
@@ -109,7 +111,7 @@ export const aboutContent: Record<Lang, AboutContent> = {
       heading: 'An experienced leadership team',
       intro: 'Complementary expertise serving your transformation.',
       members: [
-        { name: 'Miriame Ariane Fernandez', role: 'General Manager', focus: 'Strategic direction, operational oversight and team coordination.' },
+        { name: 'Miriame Ariane Fernandez', role: 'General Manager', focus: 'Strategic direction, operational oversight and team coordination.', photo: '/team/miriame-ariane-fernandez.jpeg' },
         { name: 'Adonis Dinga', role: 'Commercial & Marketing Director', focus: 'Marketing strategy, client acquisition and partnership development.' },
         { name: 'Samba Sidibe', role: 'IT Director', focus: 'Technical architecture, infrastructure deployment and cybersecurity.' },
         { name: 'Anne Nguessan', role: 'Legal Director', focus: 'Regulatory compliance, data protection and contract management.' },

@@ -59,7 +59,7 @@ export interface HomeContent {
     eyebrow: string;
     heading: string;
     subheading: string;
-    clients: string[];
+    clients: { name: string; logo: string }[];
   };
   contact: {
     eyebrow: string;
@@ -191,7 +191,14 @@ export const homeContent: Record<Lang, HomeContent> = {
       heading: 'Des références qui parlent d’elles-mêmes',
       subheading:
         'Banques, organismes publics et grands groupes nous confient leur transformation digitale et leurs infrastructures critiques.',
-      clients: ['SIB', 'CNAM', 'SNEDAI', 'Addoha', '2AT', 'ICWP'],
+      clients: [
+        { name: 'SIB', logo: '/clients/sib.png' },
+        { name: 'CNAM', logo: '/clients/cnam.jpeg' },
+        { name: 'SNEDAI', logo: '/clients/snedai.jpeg' },
+        { name: 'Addoha', logo: '/clients/addoha.png' },
+        { name: '2AT', logo: '/clients/2at.png' },
+        { name: 'ICWP', logo: '/clients/icwp.png' },
+      ],
     },
     contact: {
       eyebrow: 'Contact',
@@ -322,7 +329,14 @@ export const homeContent: Record<Lang, HomeContent> = {
       heading: 'References that speak for themselves',
       subheading:
         'Banks, public bodies and large groups trust us with their digital transformation and critical infrastructure.',
-      clients: ['SIB', 'CNAM', 'SNEDAI', 'Addoha', '2AT', 'ICWP'],
+      clients: [
+        { name: 'SIB', logo: '/clients/sib.png' },
+        { name: 'CNAM', logo: '/clients/cnam.jpeg' },
+        { name: 'SNEDAI', logo: '/clients/snedai.jpeg' },
+        { name: 'Addoha', logo: '/clients/addoha.png' },
+        { name: '2AT', logo: '/clients/2at.png' },
+        { name: 'ICWP', logo: '/clients/icwp.png' },
+      ],
     },
     contact: {
       eyebrow: 'Contact',
