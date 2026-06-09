@@ -79,26 +79,31 @@ const menuLabel = lang === 'fr' ? 'Menu de navigation' : 'Navigation menu';
     <label for="nav-toggle" class="absolute inset-0 bg-ink-950/60 backdrop-blur-sm" aria-label={closeLabel}></label>
 
     <!-- Panneau -->
-    <div class="absolute inset-x-3 top-3 max-h-[calc(100dvh-1.5rem)] overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl">
-      <div class="flex items-center justify-between">
-        <span class="leading-none">
-          <span class="block font-display text-[1.05rem] font-extrabold tracking-tight text-ink-950">FinTech</span>
-          <span class="block font-display text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-brand-600">Consulting</span>
-        </span>
-        <label for="nav-toggle" class="cursor-pointer rounded-lg p-2 text-ink-700 transition hover:bg-ink-50 hover:text-ink-900" aria-label={closeLabel}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <div class="absolute left-1/2 top-3 w-[min(18rem,calc(100%-1.5rem))] max-h-[calc(100dvh-1.5rem)] -translate-x-1/2 overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl">
+      <!-- Traducteur + fermer, en haut à droite -->
+      <div class="flex items-center justify-end gap-2">
+        <a
+          href={switchHref}
+          data-nav-close
+          class="rounded-lg border border-ink-200 px-2.5 py-1 text-sm font-semibold text-ink-600 uppercase transition hover:border-brand-400 hover:text-brand-600"
+          hreflang={otherLang}
+        >
+          {otherLang}
+        </a>
+        <label for="nav-toggle" class="cursor-pointer rounded-lg p-1.5 text-ink-700 transition hover:bg-ink-50 hover:text-ink-900" aria-label={closeLabel}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
             <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
           </svg>
         </label>
       </div>
 
-      <nav class="mt-5 flex flex-col gap-1" aria-label="Mobile">
+      <nav class="mt-2 flex flex-col items-center gap-1" aria-label="Mobile">
         {
           navLinks.map((link) => (
             <a
               href={link.href}
               data-nav-close
-              class="rounded-xl px-3 py-3 text-lg font-semibold text-ink-800 transition hover:bg-brand-50 hover:text-brand-600"
+              class="w-full rounded-xl px-3 py-3 text-center text-lg font-semibold text-ink-800 transition hover:bg-brand-50 hover:text-brand-600"
             >
               {link.label}
             </a>
@@ -106,23 +111,13 @@ const menuLabel = lang === 'fr' ? 'Menu de navigation' : 'Navigation menu';
         }
       </nav>
 
-      <div class="mt-5 flex items-center gap-3 border-t border-ink-100 pt-5">
-        <a
-          href={switchHref}
-          data-nav-close
-          class="rounded-lg border border-ink-200 px-3 py-2 text-sm font-semibold text-ink-600 uppercase transition hover:border-brand-400 hover:text-brand-600"
-          hreflang={otherLang}
-        >
-          {otherLang}
-        </a>
-        <a
-          href={`${home}#contact`}
-          data-nav-close
-          class="flex-1 rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
-        >
-          {t('nav.cta')}
-        </a>
-      </div>
+      <a
+        href={`${home}#contact`}
+        data-nav-close
+        class="mt-4 block rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
+      >
+        {t('nav.cta')}
+      </a>
     </div>
   </div>
 </header>
