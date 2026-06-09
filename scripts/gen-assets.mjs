@@ -33,26 +33,31 @@ const bg = Buffer.from(`
     </radialGradient>
     <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#5a8dfb" />
-      <stop offset="1" stop-color="#1f4fe0" />
+      <stop offset="0.55" stop-color="#36c89e" />
+      <stop offset="1" stop-color="#ff7b00" />
     </linearGradient>
   </defs>
   <rect width="${W}" height="${H}" fill="#0a1428" />
   <rect width="${W}" height="${H}" fill="url(#glow)" />
   <circle cx="${W - 120}" cy="120" r="220" fill="#1f4fe0" opacity="0.14" />
   <rect x="0" y="0" width="${W}" height="10" fill="url(#accent)" />
-  <text x="${W / 2}" y="430" text-anchor="middle"
-    font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="700" fill="#eaf0fb">
+  <text x="${W / 2}" y="445" text-anchor="middle"
+    font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="700" fill="#eaf0fb">
+    FinTech Consulting SA
+  </text>
+  <text x="${W / 2}" y="498" text-anchor="middle"
+    font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="600" fill="#36c89e">
     L'avenir de la finance est digital
   </text>
-  <text x="${W / 2}" y="488" text-anchor="middle"
-    font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="400" fill="#8eb6ff">
+  <text x="${W / 2}" y="545" text-anchor="middle"
+    font-family="'Segoe UI', Arial, sans-serif" font-size="24" font-weight="400" fill="#8eb6ff">
     Finance · Cloud · Cybersécurité · Télécoms · Abidjan
   </text>
 </svg>`);
 
-// Logo clair (blanc) redimensionné — visible sur fond navy
-const logo = await sharp(resolve(__dirname, '..', 'src', 'assets', 'brand', 'fintech-logo-light.png'))
-  .resize({ width: 300 })
+// Icône claire (blanche, sans texte) — pas de doublon avec le titre
+const logo = await sharp(resolve(__dirname, '..', 'src', 'assets', 'brand', 'fintech-icon-light.png'))
+  .resize({ width: 190 })
   .toBuffer();
 const logoMeta = await sharp(logo).metadata();
 
@@ -60,7 +65,7 @@ await sharp(bg)
   .composite([
     {
       input: logo,
-      top: Math.round(250 - logoMeta.height / 2),
+      top: 120,
       left: Math.round((W - logoMeta.width) / 2),
     },
   ])

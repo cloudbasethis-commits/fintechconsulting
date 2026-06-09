@@ -19,6 +19,18 @@
   --color-brand-900: #1c3479;
   --color-brand-950: #11204a;
 
+  /* Accent — orange du logo (#ff7b00), à utiliser avec parcimonie */
+  --color-accent-50: #fff4e6;
+  --color-accent-100: #ffe4c2;
+  --color-accent-200: #ffc585;
+  --color-accent-300: #ffa347;
+  --color-accent-400: #ff8a1f;
+  --color-accent-500: #ff7b00;
+  --color-accent-600: #e05f00;
+  --color-accent-700: #b84600;
+  --color-accent-800: #933809;
+  --color-accent-900: #78300d;
+
   /* Teal / cyan-vert — secondaire (connectivité, croissance) */
   --color-teal-50: #ecfdf6;
   --color-teal-100: #d2f9e9;
@@ -79,9 +91,9 @@ h1, h2, h3, h4 {
   scroll-margin-top: 6rem;
 }
 
-/* Utilitaire : dégradé de texte marque */
+/* Utilitaire : dégradé de texte marque (bleu → cyan → orange, couleurs du logo) */
 .text-gradient {
-  background: linear-gradient(100deg, var(--color-brand-400), var(--color-teal-400));
+  background: linear-gradient(100deg, var(--color-brand-500), var(--color-teal-400) 55%, var(--color-accent-500));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
