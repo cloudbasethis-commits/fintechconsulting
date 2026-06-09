@@ -17,15 +17,22 @@ const navLinks = [
 
 const otherLang = lang === 'fr' ? 'en' : 'fr';
 const switchHref = alternatePath(Astro.url.pathname, otherLang);
+const switchLabel = otherLang === 'en' ? 'English' : 'Français';
+// Drapeaux SVG inline (rendu fiable partout) — fr = France, en = Royaume-Uni
+const flags = {
+  fr: '<svg viewBox="0 0 9 6" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="3" height="6" fill="#0055A4"/><rect x="3" width="3" height="6" fill="#ffffff"/><rect x="6" width="3" height="6" fill="#EF4135"/></svg>',
+  en: '<svg viewBox="0 0 60 30" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="30" fill="#012169"/><path d="M0,0 60,30 M60,0 0,30" stroke="#ffffff" stroke-width="6"/><path d="M0,0 60,30 M60,0 0,30" stroke="#C8102E" stroke-width="3"/><path d="M30,0 V30 M0,15 H60" stroke="#ffffff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>',
+};
 const openLabel = lang === 'fr' ? 'Ouvrir le menu' : 'Open menu';
 const closeLabel = lang === 'fr' ? 'Fermer le menu' : 'Close menu';
 const menuLabel = lang === 'fr' ? 'Menu de navigation' : 'Navigation menu';
 ---
 
-<header class="sticky top-0 z-40 border-b border-ink-100 bg-white/80 backdrop-blur-md">
-  <!-- Toggle de la modale mobile (état CSS) -->
-  <input type="checkbox" id="nav-toggle" class="peer sr-only" />
+<!-- Toggle de la modale mobile (état CSS). Placé hors du header pour que la
+     modale en `fixed` ne soit pas contrainte par le backdrop-filter du header. -->
+<input type="checkbox" id="nav-toggle" class="peer sr-only" />
 
+<header class="sticky top-0 z-40 border-b border-ink-100 bg-white/80 backdrop-blur-md">
   <nav class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3 lg:px-8" aria-label="Principal">
     <a href={home} class="flex items-center gap-2.5" aria-label="FinTech Consulting SA — Accueil">
       <Image src={logoIcon} alt="FinTech Consulting SA" width={48} densities={[1, 2]} loading="eager" class="h-12 w-auto" />
@@ -46,10 +53,12 @@ const menuLabel = lang === 'fr' ? 'Menu de navigation' : 'Navigation menu';
       }
       <a
         href={switchHref}
-        class="rounded-lg border border-ink-200 px-2.5 py-1 text-sm font-semibold text-ink-600 uppercase transition hover:border-brand-400 hover:text-brand-600"
         hreflang={otherLang}
+        aria-label={switchLabel}
+        title={switchLabel}
+        class="block h-5 w-[1.875rem] overflow-hidden rounded-[3px] ring-1 ring-ink-200 transition hover:ring-2 hover:ring-brand-400"
       >
-        {otherLang}
+        <Fragment set:html={flags[otherLang]} />
       </a>
       <a
         href={`${home}#contact`}
@@ -66,61 +75,63 @@ const menuLabel = lang === 'fr' ? 'Menu de navigation' : 'Navigation menu';
       </svg>
     </label>
   </nav>
-
-  <!-- Modale mobile -->
-  <div
-    id="mobile-menu"
-    role="dialog"
-    aria-modal="true"
-    aria-label={menuLabel}
-    class="invisible fixed inset-0 z-50 opacity-0 transition-opacity duration-200 peer-checked:visible peer-checked:opacity-100 lg:hidden"
-  >
-    <!-- Fond assombri (clic = fermer) -->
-    <label for="nav-toggle" class="absolute inset-0 bg-ink-950/60 backdrop-blur-sm" aria-label={closeLabel}></label>
-
-    <!-- Panneau -->
-    <div class="absolute left-1/2 top-3 w-[min(18rem,calc(100%-1.5rem))] max-h-[calc(100dvh-1.5rem)] -translate-x-1/2 overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl">
-      <!-- Traducteur + fermer, en haut à droite -->
-      <div class="flex items-center justify-end gap-2">
-        <a
-          href={switchHref}
-          data-nav-close
-          class="rounded-lg border border-ink-200 px-2.5 py-1 text-sm font-semibold text-ink-600 uppercase transition hover:border-brand-400 hover:text-brand-600"
-          hreflang={otherLang}
-        >
-          {otherLang}
-        </a>
-        <label for="nav-toggle" class="cursor-pointer rounded-lg p-1.5 text-ink-700 transition hover:bg-ink-50 hover:text-ink-900" aria-label={closeLabel}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
-          </svg>
-        </label>
-      </div>
-
-      <nav class="mt-2 flex flex-col items-center gap-1" aria-label="Mobile">
-        {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              data-nav-close
-              class="w-full rounded-xl px-3 py-3 text-center text-lg font-semibold text-ink-800 transition hover:bg-brand-50 hover:text-brand-600"
-            >
-              {link.label}
-            </a>
-          ))
-        }
-      </nav>
-
-      <a
-        href={`${home}#contact`}
-        data-nav-close
-        class="mt-4 block rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
-      >
-        {t('nav.cta')}
-      </a>
-    </div>
-  </div>
 </header>
+
+<!-- Modale mobile -->
+<div
+  id="mobile-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label={menuLabel}
+  class="invisible fixed inset-0 z-50 opacity-0 transition-opacity duration-200 peer-checked:visible peer-checked:opacity-100 lg:hidden"
+>
+  <!-- Fond assombri (clic = fermer) -->
+  <label for="nav-toggle" class="absolute inset-0 bg-ink-950/60 backdrop-blur-sm" aria-label={closeLabel}></label>
+
+  <!-- Panneau (centré) -->
+  <div class="absolute left-1/2 top-1/2 w-[min(18rem,calc(100%-1.5rem))] max-h-[calc(100dvh-1.5rem)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl">
+    <!-- Traducteur + fermer, en haut à droite -->
+    <div class="flex items-center justify-end gap-2">
+      <a
+        href={switchHref}
+        data-nav-close
+        hreflang={otherLang}
+        aria-label={switchLabel}
+        title={switchLabel}
+        class="block h-6 w-9 overflow-hidden rounded-[4px] ring-1 ring-ink-200 transition hover:ring-2 hover:ring-brand-400"
+      >
+        <Fragment set:html={flags[otherLang]} />
+      </a>
+      <label for="nav-toggle" class="cursor-pointer rounded-lg p-1.5 text-ink-700 transition hover:bg-ink-50 hover:text-ink-900" aria-label={closeLabel}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
+      </label>
+    </div>
+
+    <nav class="mt-2 flex flex-col items-center gap-1" aria-label="Mobile">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            data-nav-close
+            class="w-full rounded-xl px-3 py-3 text-center text-lg font-semibold text-ink-800 transition hover:bg-brand-50 hover:text-brand-600"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href={`${home}#contact`}
+      data-nav-close
+      class="mt-4 block rounded-xl bg-brand-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700"
+    >
+      {t('nav.cta')}
+    </a>
+  </div>
+</div>
 
 <script is:inline>
   (function () {
