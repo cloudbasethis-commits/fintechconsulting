@@ -27,7 +27,7 @@ const labels =
 <section class="bg-white py-16 lg:py-24">
   <div class="mx-auto max-w-5xl px-5 lg:px-8">
     <header class="max-w-2xl">
-      <p class="text-sm font-semibold tracking-wide text-brand-600 uppercase">{t('nav.blog')}</p>
+      <p class="text-sm font-semibold tracking-wide text-accent-600 uppercase">{t('nav.blog')}</p>
       <h1 class="mt-3 text-4xl font-bold text-ink-950 sm:text-5xl">{heading}</h1>
       <p class="mt-4 text-lg text-ink-500">{intro}</p>
     </header>
@@ -50,7 +50,7 @@ const labels =
               <div class="flex flex-1 flex-col p-6">
                 <div class="flex flex-wrap gap-2">
                   {post.data.tags.slice(0, 2).map((tag) => (
-                    <span class="rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-medium text-brand-700">{tag}</span>
+                    <span class="rounded-full bg-accent-50 px-2.5 py-0.5 text-xs font-medium text-accent-700">{tag}</span>
                   ))}
                 </div>
                 <h2 class="mt-3 text-xl font-semibold text-ink-900 group-hover:text-brand-600">
