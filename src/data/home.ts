@@ -236,6 +236,7 @@ export const homeContent: Record<Lang, HomeContent> = {
         { name: 'digabloPos', logo: '/clients/digablopos.png', href: 'https://digablopos.fr/' },
         { name: 'DIGABLO', logo: '/clients/digablo.png', href: 'https://digablo.fr/' },
         { name: 'Surestaria', logo: '/clients/surestaria.png', href: 'https://surestaria.com/' },
+        { name: 'MineSync', logo: '/clients/minesync.png', href: 'https://minesync.tech/' },
       ],
     },
     contact: {
@@ -407,6 +408,7 @@ export const homeContent: Record<Lang, HomeContent> = {
         { name: 'digabloPos', logo: '/clients/digablopos.png', href: 'https://digablopos.fr/' },
         { name: 'DIGABLO', logo: '/clients/digablo.png', href: 'https://digablo.fr/' },
         { name: 'Surestaria', logo: '/clients/surestaria.png', href: 'https://surestaria.com/' },
+        { name: 'MineSync', logo: '/clients/minesync.png', href: 'https://minesync.tech/' },
       ],
     },
     contact: {

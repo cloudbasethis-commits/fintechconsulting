@@ -61,6 +61,13 @@ export const solutionsHub: Record<Lang, { heading: string; intro: string; items:
         href: 'https://surestaria.com/',
         cta: 'Visiter le site',
       },
+      {
+        name: 'MineSync',
+        tag: 'Secteur minier · Automatisation · Afrique',
+        desc: 'Automatisation digitale des processus du secteur minier : reporting temps réel, intégration multi-systèmes (ERP, WhatsApp, Google Drive) et déploiement rapide en 2 à 3 semaines.',
+        href: 'https://minesync.tech/',
+        cta: 'Visiter le site',
+      },
     ],
   },
   en: {
@@ -94,6 +101,13 @@ export const solutionsHub: Record<Lang, { heading: string; intro: string; items:
         tag: 'Freight & customs · Billing · Africa',
         desc: 'Demurrage management software for freight forwarders and customs brokers: containers, cases and multi-currency billing.',
         href: 'https://surestaria.com/',
+        cta: 'Visit the site',
+      },
+      {
+        name: 'MineSync',
+        tag: 'Mining sector · Automation · Africa',
+        desc: 'Digital automation for the mining sector: real-time reporting, multi-system integration (ERP, WhatsApp, Google Drive) and rapid deployment in 2 to 3 weeks.',
+        href: 'https://minesync.tech/',
         cta: 'Visit the site',
       },
     ],
