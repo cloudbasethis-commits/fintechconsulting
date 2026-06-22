@@ -68,6 +68,13 @@ export const solutionsHub: Record<Lang, { heading: string; intro: string; items:
         href: 'https://minesync.tech/',
         cta: 'Visiter le site',
       },
+      {
+        name: 'RadiusPro',
+        tag: 'Gestion d’entreprise · CRM · Tout-en-un',
+        desc: 'Logiciel de gestion d’entreprise tout-en-un et personnalisable pour PME : CRM, comptabilité, gestion de projet, RH et stocks réunis dans un seul outil, avec automatisation des tâches et tableaux de bord en temps réel.',
+        href: 'https://www.radiuspro.co/',
+        cta: 'Visiter le site',
+      },
     ],
   },
   en: {
@@ -108,6 +115,13 @@ export const solutionsHub: Record<Lang, { heading: string; intro: string; items:
         tag: 'Mining sector · Automation · Africa',
         desc: 'Digital automation for the mining sector: real-time reporting, multi-system integration (ERP, WhatsApp, Google Drive) and rapid deployment in 2 to 3 weeks.',
         href: 'https://minesync.tech/',
+        cta: 'Visit the site',
+      },
+      {
+        name: 'RadiusPro',
+        tag: 'Business management · CRM · All-in-one',
+        desc: 'Customizable all-in-one business management software for SMEs: CRM, accounting, project management, HR and inventory in a single tool, with workflow automation and real-time dashboards.',
+        href: 'https://www.radiuspro.co/',
         cta: 'Visit the site',
       },
     ],
