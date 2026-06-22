@@ -64,7 +64,7 @@ export interface HomeContent {
     eyebrow: string;
     heading: string;
     subheading: string;
-    clients: { name: string; logo: string; href?: string }[];
+    clients: { name: string; logo: string; href?: string; dark?: boolean }[];
   };
   contact: {
     eyebrow: string;
@@ -237,6 +237,7 @@ export const homeContent: Record<Lang, HomeContent> = {
         { name: 'DIGABLO', logo: '/clients/digablo.png', href: 'https://digablo.fr/' },
         { name: 'Surestaria', logo: '/clients/surestaria.png', href: 'https://surestaria.com/' },
         { name: 'MineSync', logo: '/clients/minesync.png', href: 'https://minesync.tech/' },
+        { name: 'RadiusPro', logo: '/clients/radiuspro.png', href: 'https://www.radiuspro.co/', dark: true },
       ],
     },
     contact: {
@@ -409,6 +410,7 @@ export const homeContent: Record<Lang, HomeContent> = {
         { name: 'DIGABLO', logo: '/clients/digablo.png', href: 'https://digablo.fr/' },
         { name: 'Surestaria', logo: '/clients/surestaria.png', href: 'https://surestaria.com/' },
         { name: 'MineSync', logo: '/clients/minesync.png', href: 'https://minesync.tech/' },
+        { name: 'RadiusPro', logo: '/clients/radiuspro.png', href: 'https://www.radiuspro.co/', dark: true },
       ],
     },
     contact: {
