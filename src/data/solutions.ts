@@ -34,7 +34,7 @@ export const solutionsHub: Record<Lang, { heading: string; intro: string; items:
       'Au-delà du conseil, nous concevons et déployons des produits souverains, sécurisés et adaptés aux réalités africaines — de la finance au commerce et à la logistique.',
     items: [
       {
-        name: 'Core Banking Digital',
+        name: 'Développement de solutions financières',
         tag: 'Banque · Microfinance · Temps réel',
         desc: 'Plateforme de gestion des comptes et des transactions, avec une interface moderne, pour banques et institutions de microfinance.',
         slug: 'core-banking',
@@ -83,7 +83,7 @@ export const solutionsHub: Record<Lang, { heading: string; intro: string; items:
       'Beyond consulting, we design and deploy sovereign, secure products adapted to African realities — from finance to retail and logistics.',
     items: [
       {
-        name: 'Digital Core Banking',
+        name: 'Financial solutions development',
         tag: 'Banking · Microfinance · Real time',
         desc: 'Account and transaction management platform with a modern interface, for banks and microfinance institutions.',
         slug: 'core-banking',
@@ -132,14 +132,14 @@ export const solutionDetails: Record<Lang, SolutionDetail[]> = {
   fr: [
     {
       slug: 'core-banking',
-      name: 'Core Banking Digital',
+      name: 'Développement de solutions financières',
       tag: 'Banque · Microfinance · Temps réel',
-      metaTitle: 'Core Banking Digital pour banques & microfinances en Côte d’Ivoire | FinTech Consulting SA',
+      metaTitle: 'Développement de solutions financières pour banques & microfinances en Côte d’Ivoire | FinTech Consulting SA',
       metaDescription:
-        'Solution Core Banking digitale pour banques et institutions de microfinance en Côte d’Ivoire : gestion des comptes et transactions en temps réel, mobile money, conformité BCEAO/UEMOA.',
+        'Développement de solutions financières digitales pour banques et institutions de microfinance en Côte d’Ivoire : gestion des comptes et transactions en temps réel, mobile money, conformité BCEAO/UEMOA.',
       tagline: 'Le cœur digital de votre banque, ouvert sur le mobile money et conforme à l’UEMOA.',
       intro: [
-        'Le Core Banking est le système central qui gère les comptes, les transactions et les opérations de votre établissement. Notre solution Core Banking Digital a été pensée pour les banques et institutions de microfinance ivoiriennes : moderne, ouverte et centrée sur l’utilisateur.',
+        'Nous développons des solutions financières digitales qui gèrent les comptes, les transactions et les opérations de votre établissement. Pensées pour les banques et institutions de microfinance ivoiriennes : modernes, ouvertes et centrées sur l’utilisateur.',
         'Elle s’intègre en temps réel avec les canaux mobiles, le mobile money et la monétique, et intègre la conformité BCEAO / UEMOA dès sa conception. Vous gardez le contrôle, vos clients gagnent en simplicité.',
       ],
       features: [
@@ -158,7 +158,7 @@ export const solutionDetails: Record<Lang, SolutionDetail[]> = {
       ],
       faq: [
         { q: 'La solution est-elle conforme à la réglementation BCEAO/UEMOA ?', a: 'Oui. La conformité (règles, reporting, traçabilité) est intégrée dès la conception, dans le respect du cadre de la BCEAO et de l’UEMOA.' },
-        { q: 'Peut-on intégrer le mobile money ?', a: 'Oui, le Core Banking s’intègre nativement avec les opérateurs de mobile money et le paiement marchand utilisés en Côte d’Ivoire.' },
+        { q: 'Peut-on intégrer le mobile money ?', a: 'Oui, la solution s’intègre nativement avec les opérateurs de mobile money et le paiement marchand utilisés en Côte d’Ivoire.' },
         { q: 'Convient-elle aux institutions de microfinance ?', a: 'Absolument. La solution s’adapte aux banques comme aux IMF, avec une gestion multi-agences et multi-devises.' },
       ],
       ctaLine: 'Modernisons le cœur digital de votre banque.',
@@ -200,14 +200,14 @@ export const solutionDetails: Record<Lang, SolutionDetail[]> = {
   en: [
     {
       slug: 'core-banking',
-      name: 'Digital Core Banking',
+      name: 'Financial solutions development',
       tag: 'Banking · Microfinance · Real time',
-      metaTitle: 'Digital Core Banking for banks & microfinance in Côte d’Ivoire | FinTech Consulting SA',
+      metaTitle: 'Financial solutions development for banks & microfinance in Côte d’Ivoire | FinTech Consulting SA',
       metaDescription:
-        'Digital Core Banking solution for banks and microfinance institutions in Côte d’Ivoire: real-time account and transaction management, mobile money, BCEAO/WAEMU compliance.',
+        'Development of digital financial solutions for banks and microfinance institutions in Côte d’Ivoire: real-time account and transaction management, mobile money, BCEAO/WAEMU compliance.',
       tagline: 'The digital heart of your bank, open to mobile money and WAEMU-compliant.',
       intro: [
-        'Core Banking is the central system that manages accounts, transactions and operations. Our Digital Core Banking solution is designed for Ivorian banks and microfinance institutions: modern, open and user-centric.',
+        'We develop digital financial solutions that manage accounts, transactions and operations. Designed for Ivorian banks and microfinance institutions: modern, open and user-centric.',
         'It integrates in real time with mobile channels, mobile money and monetics, and builds in BCEAO / WAEMU compliance from the design phase. You keep control, your customers gain simplicity.',
       ],
       features: [
@@ -226,7 +226,7 @@ export const solutionDetails: Record<Lang, SolutionDetail[]> = {
       ],
       faq: [
         { q: 'Is the solution compliant with BCEAO/WAEMU regulation?', a: 'Yes. Compliance (rules, reporting, traceability) is built in from the design phase, within the BCEAO and WAEMU framework.' },
-        { q: 'Can mobile money be integrated?', a: 'Yes, Core Banking natively integrates with mobile money operators and merchant payment used in Côte d’Ivoire.' },
+        { q: 'Can mobile money be integrated?', a: 'Yes, the solution natively integrates with mobile money operators and merchant payment used in Côte d’Ivoire.' },
         { q: 'Is it suitable for microfinance institutions?', a: 'Absolutely. The solution fits banks and MFIs alike, with multi-branch and multi-currency management.' },
       ],
       ctaLine: 'Let’s modernize the digital heart of your bank.',
