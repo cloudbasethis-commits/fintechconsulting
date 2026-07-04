@@ -38,7 +38,6 @@ export const servicesContent: Record<Lang, Service[]> = {
         { title: 'Ingénierie financière', desc: 'Optimisation, structuration et modélisation financière au service de votre rentabilité.' },
         { title: 'Digitalisation des paiements', desc: 'Mobile money, paiement marchand, agrégation : intégrez tous les canaux de paiement ivoiriens.' },
         { title: 'Monétique & switch', desc: 'Interconnexion sécurisée temps réel des réseaux de paiement (cartes, GIM-UEMOA).' },
-        { title: 'Core Banking digital', desc: 'Gestion des comptes et des transactions avec une interface centrée sur l’utilisateur.' },
         { title: 'Business Intelligence', desc: 'Reporting automatisé et tableaux de bord décisionnels pour piloter par la donnée.' },
         { title: 'Audit, conformité & sécurité', desc: 'Audit financier, conformité réglementaire BCEAO et sécurisation des flux.' },
       ],
