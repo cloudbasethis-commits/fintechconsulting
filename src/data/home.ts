@@ -95,7 +95,7 @@ export const homeContent: Record<Lang, HomeContent> = {
     },
     services: {
       eyebrow: 'Nos expertises',
-      heading: 'Quatre pôles, une transformation maîtrisée',
+      heading: 'Trois pôles, une transformation maîtrisée',
       subheading:
         'De la finance digitale aux infrastructures critiques, nous couvrons toute la chaîne de votre transformation numérique, avec un ancrage local fort.',
       linkLabel: 'Voir le détail de nos services',
@@ -142,7 +142,7 @@ export const homeContent: Record<Lang, HomeContent> = {
         'Au-delà du conseil, nous concevons et déployons des produits souverains, sécurisés et adaptés aux réalités africaines — de la finance au commerce et à la logistique.',
       items: [
         {
-          name: 'Core Banking Digital',
+          name: 'Développement de solutions financières',
           tag: 'Banque · Microfinance · Temps réel',
           desc: 'Plateforme de gestion des comptes et des transactions, avec une interface moderne centrée sur l’utilisateur, pour les banques et institutions de microfinance.',
           features: [
@@ -152,19 +152,6 @@ export const homeContent: Record<Lang, HomeContent> = {
             'Conçu pour la conformité BCEAO / UEMOA',
           ],
           slug: 'core-banking',
-          cta: 'En savoir plus',
-        },
-        {
-          name: 'Switch Monétique',
-          tag: 'Paiement · Cartes · Interconnexion',
-          desc: 'Solution d’interconnexion sécurisée des réseaux de paiement en temps réel : cartes, mobile money et systèmes interbancaires, pour fluidifier vos transactions.',
-          features: [
-            'Interconnexion temps réel des réseaux de paiement',
-            'Sécurité de bout en bout des transactions',
-            'Compatibilité cartes et GIM-UEMOA',
-            'Supervision et haute disponibilité',
-          ],
-          slug: 'switch-monetique',
           cta: 'En savoir plus',
         },
         {
@@ -204,7 +191,7 @@ export const homeContent: Record<Lang, HomeContent> = {
         'Trois principes nous guident — Innovation, Excellence, Transparence — et une conviction : la technologie n’a de sens que lorsqu’elle sert des résultats mesurables pour nos clients.',
       ],
       stats: [
-        { value: '4', label: 'Pôles d’expertise' },
+        { value: '3', label: 'Pôles d’expertise' },
         { value: '6', label: 'Grandes références' },
         { value: '24/7', label: 'Supervision & support' },
         { value: 'Abidjan', label: 'Ancrage local, ambition panafricaine' },
@@ -268,7 +255,7 @@ export const homeContent: Record<Lang, HomeContent> = {
     },
     services: {
       eyebrow: 'Our expertise',
-      heading: 'Four pillars, one mastered transformation',
+      heading: 'Three pillars, one mastered transformation',
       subheading:
         'From digital finance to critical infrastructure, we cover the entire chain of your digital transformation, with strong local roots.',
       linkLabel: 'See our services in detail',
@@ -315,7 +302,7 @@ export const homeContent: Record<Lang, HomeContent> = {
         'Beyond consulting, we design and deploy sovereign, secure products adapted to African realities — from finance to retail and logistics.',
       items: [
         {
-          name: 'Digital Core Banking',
+          name: 'Financial solutions development',
           tag: 'Banking · Microfinance · Real time',
           desc: 'Account and transaction management platform with a modern, user-centric interface, for banks and microfinance institutions.',
           features: [
@@ -325,19 +312,6 @@ export const homeContent: Record<Lang, HomeContent> = {
             'Designed for BCEAO / WAEMU compliance',
           ],
           slug: 'core-banking',
-          cta: 'Learn more',
-        },
-        {
-          name: 'Card Switch',
-          tag: 'Payment · Cards · Interconnection',
-          desc: 'Secure real-time interconnection of payment networks: cards, mobile money and interbank systems, to streamline your transactions.',
-          features: [
-            'Real-time interconnection of payment networks',
-            'End-to-end transaction security',
-            'Card and GIM-WAEMU compatibility',
-            'Monitoring and high availability',
-          ],
-          slug: 'switch-monetique',
           cta: 'Learn more',
         },
         {
@@ -377,7 +351,7 @@ export const homeContent: Record<Lang, HomeContent> = {
         'Three principles guide us — Innovation, Excellence, Transparency — and one conviction: technology only matters when it delivers measurable results for our clients.',
       ],
       stats: [
-        { value: '4', label: 'Areas of expertise' },
+        { value: '3', label: 'Areas of expertise' },
         { value: '6', label: 'Major references' },
         { value: '24/7', label: 'Monitoring & support' },
         { value: 'Abidjan', label: 'Local roots, pan-African ambition' },
